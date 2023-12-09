@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       folders: ${{ steps.set_matrix.outputs.matrix }}
-      any_changed: ${{ steps.get_changes.any_changed }}
+      any_changed: ${{ steps.get_changes.outputs.any_changed }}
     steps:
       - name: "Checkout for Push event (full history)"
         uses: actions/checkout@v3
