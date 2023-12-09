@@ -30,9 +30,10 @@ jobs:
         id: get_changes
         uses: tj-actions/changed-files@v40
         with:
-         files_ignore: |
-           .github/workflows/**
-           README.md
+          dir_names: true
+          files_ignore: |
+            .github/workflows/**
+            README.md
 
       - name: set matrix output
         id: set_matrix
