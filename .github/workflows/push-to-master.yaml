@@ -26,6 +26,15 @@ jobs:
         with:
           fetch-depth: 0
       
+      - name: Get changed dirs
+        id: get_changes
+        uses: tj-actions/changed-files@v40
+        with:
+          dir_names: true
+          files_ignore: |
+            .github/workflows/**
+            README.md
+      
       - name: set matrix output
         id: set_matrix
         run: |
@@ -83,14 +92,7 @@ jobs:
           package-name: ${{ matrix.folder }}
           command: github-release      
 
-      - name: Get changed dirs
-        id: get_changes
-        uses: tj-actions/changed-files@v40
-        with:
-          dir_names: true
-          files_ignore: |
-            .github/workflows/**
-            README.md
+
 
  
 
