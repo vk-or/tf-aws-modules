@@ -4,10 +4,10 @@ on:
   push:
     branches:
       - master
-    paths:
-      - "!README.md"
-      - "!.github/**"
-      - "*"
+    # paths:
+    #   - "!README.md"
+    #   - "!.github/**"
+    #   - "*"
 
 permissions:
   contents: write
