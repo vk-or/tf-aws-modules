@@ -35,6 +35,7 @@ jobs:
           files_ignore: |
             .github/workflows/**
             README.md
+            CHANGELOG.md
       
       - name: set matrix output
         id: set_matrix
