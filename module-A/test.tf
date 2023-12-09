@@ -1,2 +1,3 @@
 variable "a" {
+  type = bool
 }
