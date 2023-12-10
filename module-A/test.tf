@@ -1,5 +1,5 @@
 variable "a" {
-  type = bool
+  type        = bool
   description = 'fake'
   default     = true
 }
