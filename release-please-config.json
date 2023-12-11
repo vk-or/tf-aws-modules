@@ -1,22 +1,16 @@
 {
-  "release-type": "helm",
-  "versioning": "default",
-  "skip-github-release": true,
-  "label": "release: pending",
-  "release-label": "release: approved",
+  "release-type": "terraform-module",
   "include-component-in-tag": true,
   "include-v-in-tag": false,
   "separate-pull-requests": true,
-  "pull-request-title-pattern": "chore: release${component} ${version}",
-  "bump-minor-pre-major": true,
-  "bump-patch-for-minor-pre-major": true,
-  "plugins": [
-    "sentence-case"
-  ],
   "packages": {
-    "charts/acc-common": {
-      "component": "acc-common",
-      "package-name": "acc-common"
+    "module-A": {
+      "component": "module-A",
+      "package-name": "module-A"
+    }
+  "module-B": {
+      "component": "module-B",
+      "package-name": "module-B"
     }
   }
 }
