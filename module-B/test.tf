@@ -1,3 +1,3 @@
 variable "b" {
-
+  
 }
