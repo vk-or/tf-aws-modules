@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/vk-or/tf-aws-modules/compare/v0.1.0...v0.1.1) (2023-12-11)
+
+
+### Bug Fixes
+
+* Update test.tf ([7276b56](https://github.com/vk-or/tf-aws-modules/commit/7276b56ab7e73da3917b58691d2efebc99f0a806))
+
 ## [0.1.4](https://github.com/vk-or/tf-aws-modules/compare/module-B-v0.1.3...module-B-v0.1.4) (2023-12-09)
 
 
