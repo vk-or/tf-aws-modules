@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.0 (2023-12-11)
+
+
+### Bug Fixes
+
+* Update test.tf ([eb0da56](https://github.com/vk-or/tf-aws-modules/commit/eb0da563d02d457b23bf437c11594e81bf2ef8ad))
+
 ## 0.1.0 (2023-12-10)
 
 
