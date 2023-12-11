@@ -22,6 +22,4 @@ jobs:
         id: release-please
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          release-type: terraform-module
-          include-component-in-tag: true
           
