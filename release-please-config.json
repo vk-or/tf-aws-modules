@@ -4,11 +4,11 @@
   "include-v-in-tag": false,
   "separate-pull-requests": true,
   "packages": {
-    "./module-A": {
+    "modules/module-A": {
       "component": "module-A",
       "package-name": "module-A"
     },
-    "./module-B": {
+    "modules/module-B": {
       "component": "module-B",
       "package-name": "module-B"
     }
