@@ -16,7 +16,6 @@ permissions:
 
 jobs:
   release-pr:
-    if: needs.find-release-changes.outputs.any_changed == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: google-github-actions/release-please-action@v4
