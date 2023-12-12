@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set_matrix.outputs.matrix }}
-      any_changed: ${{ steps.get_changes.outputs.any_changed }}
+      any_modified: ${{ steps.get_changes.outputs.any_modified }}
     steps:
       - name: "Checkout for Push event (full history)"
         uses: actions/checkout@v3
@@ -57,7 +57,7 @@ jobs:
 
   release:
     runs-on: ubuntu-latest
-    if: needs.find-release-changes.outputs.any_changed == 'true'
+    if: needs.find-release-changes.outputs.any_modified == 'true'
     needs: [find-release-changes]
     strategy:
       fail-fast: false
