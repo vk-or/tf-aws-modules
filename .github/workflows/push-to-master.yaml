@@ -80,6 +80,9 @@ jobs:
           change_path: ${{ matrix.folder }}
           tag_prefix: "v"
           namespace: ${{ env.module }}
+          major_pattern: "(breaking)"
+          minor_pattern: "(feat)"
+          version_format: "${namespace}-${major}.${minor}.${patch}"
 
       - name: "Create github tag and release"
         uses: softprops/action-gh-release@v1
