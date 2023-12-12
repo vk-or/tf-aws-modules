@@ -63,7 +63,12 @@ jobs:
       fail-fast: false
       matrix:
         folder: ${{ fromJson(needs.find-release-changes.outputs.matrix) }}
-    steps: 
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          
       - id: version
         run: |
           MODULE=$(echo ${{ matrix.folder }} | cut -d "/" -f2)
