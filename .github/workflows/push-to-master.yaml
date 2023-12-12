@@ -84,6 +84,19 @@ jobs:
           major_pattern: "/^((((fix)|(feat)|(perf))(\\([a-z]+\\))?!)|(BREAKING CHANGE)(\\([a-z]+\\))?):/"
           minor_pattern: "/^((fix)|(feat)|(perf))(\\([a-z]+\\))?:/"
 
+      
+      - name: "Set version output"
+        shell: bash
+        id: version_output
+        run: | 
+          echo ":rocket: Calculated \`new_version\` is **${{ steps.version.outputs.version }}**" >> $GITHUB_STEP_SUMMARY
+      
+      - name: "Set version_tag output"
+        shell: bash
+        id: version_tag_output
+        run: |
+          echo ":hammer_and_wrench: Calculated \`new_tag\` is **${{ steps.version.outputs.version_tag }}**" >> $GITHUB_STEP_SUMMARY
+        
       - name: "Create github tag and release"
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
         uses: softprops/action-gh-release@v1
