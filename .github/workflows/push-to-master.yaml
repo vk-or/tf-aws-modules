@@ -65,17 +65,25 @@ jobs:
         folder: ${{ fromJson(needs.find-release-changes.outputs.matrix) }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           
-      - id: version
+      - id: module
         run: |
           MODULE=$(echo ${{ matrix.folder }} | cut -d "/" -f2)
           echo "module=${MODULE}" >> $GITHUB_ENV
       
       - uses: paulhatch/semantic-version@v5.3.0
+        id: version
         with:
           change_path: ${{ matrix.folder }}
           tag_prefix: "v"
           namespace: ${{ env.module }}
+
+      - name: "Create github tag and release"
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.version.outputs.version_tag }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
