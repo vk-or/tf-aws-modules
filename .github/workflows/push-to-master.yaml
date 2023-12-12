@@ -81,9 +81,8 @@ jobs:
           change_path: ${{ matrix.folder }}
           tag_prefix: "v"
           namespace: ${{ env.module }}
-          major_pattern: "(breaking)"
-          minor_pattern: "(feat)"
-          version_format: "${namespace}-${major}.${minor}.${patch}"
+          major_pattern: "/^((((fix)|(feat)|(perf))(\\([a-z]+\\))?!)|(BREAKING CHANGE)(\\([a-z]+\\))?):/"
+          minor_pattern: "/^((fix)|(feat)|(perf))(\\([a-z]+\\))?:/"
 
       - name: "Create github tag and release"
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
