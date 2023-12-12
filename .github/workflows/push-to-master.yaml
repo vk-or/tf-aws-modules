@@ -39,7 +39,7 @@ jobs:
       - name: set matrix output
         id: set_matrix
         run: |
-          tmp=(${{ steps.get_changes.outputs.all_changed_files }})
+          tmp=(${{ steps.get_changes.outputs.all_modified_files }})
           X=($(for d in "${tmp[@]}"; do echo "${d}"; done | sort -u))
           json_array() {
             echo -n '['
