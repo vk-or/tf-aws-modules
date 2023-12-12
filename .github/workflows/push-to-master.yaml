@@ -15,11 +15,62 @@ permissions:
   packages: write
 
 jobs:
-  release-pr:
+  find-release-changes:
+    name: Change finder for modules folders
     runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set_matrix.outputs.matrix }}
+      any_changed: ${{ steps.get_changes.outputs.any_changed }}
     steps:
-      - uses: google-github-actions/release-please-action@v4
-        id: release-please
+      - name: "Checkout for Push event (full history)"
+        uses: actions/checkout@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          
+          fetch-depth: 0
+
+      - name: Get changed dirs
+        id: get_changes
+        uses: tj-actions/changed-files@v40
+        with:
+          dir_names: true
+          files_ignore: |
+            .github/workflows/**
+            README.md
+
+      - name: set matrix output
+        id: set_matrix
+        run: |
+          tmp=(${{ steps.get_changes.outputs.all_changed_files }})
+          X=($(for d in "${tmp[@]}"; do echo "${d}"; done | sort -u))
+          json_array() {
+            echo -n '['
+            while [ $# -gt 0 ]; do
+              x=${1//\\/\\\\}
+              echo -n \"${x//\"/\\\"}\"
+              [ $# -gt 1 ] && echo -n ', '
+              shift
+            done
+            echo ']'
+          }
+
+          matrix=$(json_array "${X[@]}")
+          echo "matrix=$matrix" >> $GITHUB_OUTPUT
+
+  release:
+    runs-on: ubuntu-latest
+    if: needs.get_changes.outputs.any_changed == 'true'
+    needs: [find-release-changes]
+    strategy:
+      fail-fast: false
+      matrix:
+        folder: ${{ fromJson(needs.get_changes.outputs.matrix) }}
+    steps: 
+      - id: version
+        run: |
+          MODULE=$(echo ${{ matrix.folder }} | cut -d "/" -f2)
+          echo "module=${MODULE}" >> $GITHUB_ENV
+      
+      - uses: paulhatch/semantic-version@v5.3.0
+        with:
+          change_path: ${{ matrix.folder }}
+          tag_prefix: "v"
+          namespace: ${{ env.module }}
