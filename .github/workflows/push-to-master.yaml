@@ -57,12 +57,12 @@ jobs:
 
   release:
     runs-on: ubuntu-latest
-    if: needs.get_changes.outputs.any_changed == 'true'
+    if: needs.find-release-changes.outputs.any_changed == 'true'
     needs: [find-release-changes]
     strategy:
       fail-fast: false
       matrix:
-        folder: ${{ fromJson(needs.get_changes.outputs.matrix) }}
+        folder: ${{ fromJson(needs.find-release-changes.outputs.matrix) }}
     steps: 
       - id: version
         run: |
