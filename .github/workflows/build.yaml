@@ -9,10 +9,6 @@ on:
       - "!.github/**"
       - "*"  
   pull_request:
-    paths:
-      - "!README.md"
-      - "!.github/**"
-      - "*"
 
 permissions:
   contents: write
