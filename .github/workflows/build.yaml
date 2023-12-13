@@ -78,8 +78,8 @@ jobs:
         with:
           change_path: ${{ matrix.folder }}
           tag_prefix: "${{ env.module }}-v"
-          major_pattern: "/^((((fix)|(feat)|(perf)|(chore)|(docs)|(test)|(refactor)|(build)|(ci))(\\([a-z]+\\))?!)|(BREAKING CHANGE)(\\([a-z]+\\))?):/"
-          minor_pattern: "/^((feat))(\\([a-z]+\\))?:/"
+          major_pattern: "/^BREAKING CHANGE:|^[^()!:]+(?:\([^()!:]+\))?!:/"
+          minor_pattern: "/^feat(?:\([^()!:]+\))?:/"
 
       
       - name: "Set version output"
