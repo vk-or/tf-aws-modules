@@ -4,11 +4,15 @@ on:
   push:
     branches:
       - master
+    paths:
+      - "!README.md"
+      - "!.github/**"
+      - "*"  
   pull_request:
-    # paths:
-    #   - "!README.md"
-    #   - "!.github/**"
-    #   - "*"
+    paths:
+      - "!README.md"
+      - "!.github/**"
+      - "*"
 
 permissions:
   contents: write
@@ -79,8 +83,7 @@ jobs:
         id: version
         with:
           change_path: ${{ matrix.folder }}
-          tag_prefix: "v"
-          namespace: ${{ env.module }}
+          tag_prefix: "${{ env.module }}-v"
           major_pattern: "/^((((fix)|(feat)|(perf)|(chore)|(docs)|(test)|(refactor)|(build)|(ci))(\\([a-z]+\\))?!)|(BREAKING CHANGE)(\\([a-z]+\\))?):/"
           minor_pattern: "/^((feat))(\\([a-z]+\\))?:/"
 
@@ -97,7 +100,7 @@ jobs:
         run: |
           echo ":hammer_and_wrench: Calculated \`new_tag\` is **${{ steps.version.outputs.version_tag }}**" >> $GITHUB_STEP_SUMMARY
         
-      - name: "Create github tag and release"
+      - name: "Create GitHub tag and release"
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
         uses: softprops/action-gh-release@v1
         with:
