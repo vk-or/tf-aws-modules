@@ -1,0 +1,19 @@
+name: Release please workflow
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+
+jobs:
+  docker-info:
+    name: Docker
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set_matrix.outputs.matrix }}
+      any_modified: ${{ steps.get_changes.outputs.any_modified }}
+    steps:
+      - name: Docer
+        run: docker info
