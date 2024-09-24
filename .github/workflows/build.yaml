@@ -28,7 +28,7 @@ jobs:
 
       - name: Get changed dirs
         id: get_changes
-        uses: tj-actions/changed-files@v40
+        uses: tj-actions/changed-files@v41
         with:
           dir_names: true
           files_ignore: |
